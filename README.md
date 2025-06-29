@@ -38,13 +38,13 @@ This project is a secure, full-featured authentication system built with **Node.
 
 ##  Folder Structure
 
-project-root/
-├── public/
-│   ├── html/              # Frontend HTML pages
-│   └── styles/            # CSS and static files
-├── app.js                 # Main server file
-├── package.json
-└── README.md
+* project-root/
+* ├── public/
+* │   ├── html/              # Frontend HTML pages
+* │   └── styles/            # CSS and static files
+* ├── app.js                 # Main server file
+* ├── package.json
+* └── README.md
 
 
 ##  Setup & Run Locally
@@ -68,22 +68,22 @@ Create a `.env` file in the root directory:
 
 
 ## Database Config ##
-USER_NAME=your_db_user
-USER_PASS=your_db_password
-HOST_NAME=localhost
-DB_NAME=your_db_name
-DB_PORT=5432
+* USER_NAME=your_db_user
+* USER_PASS=your_db_password
+* HOST_NAME=localhost
+* DB_NAME=your_db_name
+* DB_PORT=5432
 
 ## Session Secret ##
-SECRET_CODE=your_secret
+* SECRET_CODE=your_secret
 
 ## Google OAuth ##
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
+* GOOGLE_CLIENT_ID=your_google_client_id
+* GOOGLE_CLIENT_SECRET=your_google_client_secret
 
 ## Email (Gmail) ##
-EMAIL_USER=your_gmail_address
-EMAIL_PASS=your_gmail_app_password
+* EMAIL_USER=your_gmail_address
+* EMAIL_PASS=your_gmail_app_password
 
 >  **Note**: If you're using Gmail and have 2FA enabled, you must [generate an App Password](https://support.google.com/accounts/answer/185833?hl=en) and use that as `EMAIL_PASS`.
 
@@ -91,24 +91,24 @@ EMAIL_PASS=your_gmail_app_password
 
 ### 4. Set Up PostgreSQL
 
-Run the following SQL to create the `users` table:
+* Run the following SQL to create the `users` table:
 
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  mail_id VARCHAR(255) UNIQUE NOT NULL,
-  password TEXT NOT NULL,
-  verified BOOLEAN DEFAULT false,
-  verification_token TEXT,
-  token_expires TIMESTAMP,
-  reset_token TEXT,
-  reset_token_expires TIMESTAMP
-);
+* CREATE TABLE users (
+  * id SERIAL PRIMARY KEY,
+  * mail_id VARCHAR(255) UNIQUE NOT NULL,
+  * password TEXT NOT NULL,
+  * verified BOOLEAN DEFAULT false,
+  * verification_token TEXT,
+  * token_expires TIMESTAMP,
+  * reset_token TEXT,
+  * reset_token_expires TIMESTAMP
+* );
 
 ### 5. Run the Server
 
-node app.js
+* node app.js
 
-Server will start at: [http://localhost:3000](http://localhost:3000)
+* Server will start at: [http://localhost:3000](http://localhost:3000)
 
 
 ##  Testing Features
