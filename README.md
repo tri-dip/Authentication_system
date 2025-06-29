@@ -102,7 +102,7 @@ Create a `.env` file in the root directory:
   * token_expires TIMESTAMP,
   * reset_token TEXT,
   * reset_token_expires TIMESTAMP
-* );
+);
 
 ### 5. Run the Server
 
