@@ -67,28 +67,23 @@ npm install
 Create a `.env` file in the root directory:
 
 
-# Database Config
+## Database Config ##
 USER_NAME=your_db_user
 USER_PASS=your_db_password
 HOST_NAME=localhost
 DB_NAME=your_db_name
 DB_PORT=5432
 
-# Session Secret
+## Session Secret ##
 SECRET_CODE=your_secret
 
-# Google OAuth
+## Google OAuth ##
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 
-# Email (Gmail)
+## Email (Gmail) ##
 EMAIL_USER=your_gmail_address
 EMAIL_PASS=your_gmail_app_password
-
-# Misc
-DEFAULT_PASS=google
-SALTROUNDS=10
-```
 
 >  **Note**: If you're using Gmail and have 2FA enabled, you must [generate an App Password](https://support.google.com/accounts/answer/185833?hl=en) and use that as `EMAIL_PASS`.
 
