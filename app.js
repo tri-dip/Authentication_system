@@ -60,8 +60,6 @@ function sendVerificationEmail(email, token) {
       <h2>Welcome to MyApp!</h2>
       <p>Thanks for signing up. Please verify your email address by clicking the button below:</p>
       <p><a href="${link}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none;">Verify Email</a></p>
-      <p>If the button doesn’t work, copy and paste the following link into your browser:</p>
-      <p>${link}</p>
       <br>
       <p>Thank you,<br>The MyApp Team</p>
     `,
