@@ -42,7 +42,6 @@ function ensureAuthenticated(req, res, next) {
 }
 
 const BASE_URL = process.env.BASE_URL;
-
 function sendVerificationEmail(email, token) {
   const transporter = nodemailer.createTransport({
     service: "Gmail",
@@ -51,13 +50,23 @@ function sendVerificationEmail(email, token) {
       pass: process.env.EMAIL_PASS,
     },
   });
+
   const link = `${BASE_URL}/verify?token=${token}`;
   const mailOptions = {
     from: `"MyApp Team" <${process.env.EMAIL_USER}>`,
     to: email,
-    subject: "Verify your email for MyApp",
-    html: `<p>Verify your email: <a href="${link}">Click here</a></p>`
+    subject: "Please verify your email address",
+    html: `
+      <h2>Welcome to MyApp!</h2>
+      <p>Thanks for signing up. Please verify your email address by clicking the button below:</p>
+      <p><a href="${link}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none;">Verify Email</a></p>
+      <p>If the button doesn’t work, copy and paste the following link into your browser:</p>
+      <p>${link}</p>
+      <br>
+      <p>Thank you,<br>The MyApp Team</p>
+    `,
   };
+
   transporter.sendMail(mailOptions, (err) => {
     if (err) console.error("Email error:", err);
   });
@@ -71,13 +80,23 @@ function sendResetMail(email) {
       pass: process.env.EMAIL_PASS,
     },
   });
+
   const link = `${BASE_URL}/setpass`;
   const mailOptions = {
     from: `"MyApp Team" <${process.env.EMAIL_USER}>`,
     to: email,
     subject: "Set your password for MyApp",
-    html: `<p>Set password: <a href="${link}">Click here</a></p><p>Or login with <a href="${BASE_URL}/login">google</a></p>`
+    html: `
+      <h2>Finish Setting Up Your Account</h2>
+      <p>It looks like your account was created with Google Sign-In.</p>
+      <p>If you'd like to use email/password login instead, please set a password using the button below:</p>
+      <p><a href="${link}" style="padding: 10px 20px; background-color: #2196F3; color: white; text-decoration: none;">Set Password</a></p>
+      <p>Or continue using <a href="${BASE_URL}/login">Google Sign-In</a> as usual.</p>
+      <br>
+      <p>Thank you,<br>The MyApp Team</p>
+    `,
   };
+
   transporter.sendMail(mailOptions, (err) => {
     if (err) console.error("Email error:", err);
   });
@@ -91,17 +110,29 @@ function sendforgetpassmail(email, token) {
       pass: process.env.EMAIL_PASS,
     },
   });
+
   const link = `${BASE_URL}/resetpass?token=${token}`;
   const mailOptions = {
     from: `"MyApp Team" <${process.env.EMAIL_USER}>`,
     to: email,
-    subject: "Reset your password",
-    html: `<p>Enter a new password: <a href="${link}">Click here</a></p>`
+    subject: "Reset your MyApp password",
+    html: `
+      <h2>Password Reset Requested</h2>
+      <p>We received a request to reset your password. Click the button below to choose a new password:</p>
+      <p><a href="${link}" style="padding: 10px 20px; background-color: #f44336; color: white; text-decoration: none;">Reset Password</a></p>
+      <p>If you did not request this, you can safely ignore this email.</p>
+      <p>Or copy and paste this link into your browser:</p>
+      <p>${link}</p>
+      <br>
+      <p>Thank you,<br>The MyApp Team</p>
+    `,
   };
+
   transporter.sendMail(mailOptions, (err) => {
     if (err) console.error("Email error:", err);
   });
 }
+
 
 app.get("/", (req, res) => res.sendFile(__dirname + "/public/html/main.html"));
 app.get("/login", (req, res) => res.sendFile(__dirname + "/public/html/login.html"));
@@ -126,7 +157,7 @@ app.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   const token = uuidv4();
   const expiry = new Date(Date.now() + 3600000);
-  await db.query("INSERT INTO users (mail_id, password, verified, verification_token, token_expires) VALUES ($1, $2, $3, $4, $5)", [mail_id, hashedPassword, false, token, expiry]);
+  await db.query("INSERT INTO users (mail_id, password, verified, verification_token, token_expires) VALUES ($1, $2, $3, $4, $5)", [mail_id, hashedPassword, false , token, expiry]);
 
   sendVerificationEmail(mail_id, token);
   res.send("Signup successful. Check your email to verify.");
@@ -190,6 +221,8 @@ passport.use("local", new Strategy(
       if (result.rows.length === 0) return cb(null, false, { message: "User not found, Try Signing-Up" });
 
       const user = result.rows[0];
+      if (!user.verified) return cb(null, false, { message: "Please verify your email before logging in" });
+
       if (user.password === "google") {
         sendResetMail(email);
         return cb(null, false, { message: "Use Google Sign-In for this account" });
