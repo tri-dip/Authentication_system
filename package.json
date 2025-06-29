@@ -1,0 +1,34 @@
+{
+  "name": "authentication_system",
+  "version": "1.0.0",
+  "description": "authentication system",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tri-dip/Authentication_system.git"
+  },
+  "author": "Tridip Kalita",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tri-dip/Authentication_system/issues"
+  },
+  "homepage": "https://github.com/tri-dip/Authentication_system#readme",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "nodemailer": "^7.0.3",
+    "passport": "^0.7.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.16.2",
+    "session": "^0.1.0",
+    "uuid": "^11.1.0"
+  }
+}
