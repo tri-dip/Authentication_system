@@ -7,7 +7,10 @@ This project is a secure, full-featured authentication system built with **Node.
 * Session management
 * Secure hashing using `bcrypt`
 
+# Live demo (deployed)
 
+* The project is live at [https://authentication-system-hftm.onrender.com/](https://authentication-system-hftm.onrender.com/)
+* **Note**: It may take few seconds to display the site for the first time
 
 ##  Technologies Used
 
@@ -28,8 +31,8 @@ This project is a secure, full-featured authentication system built with **Node.
 * User registration with email verification
 * Login with:
 
-  * Email & Password
-  * Google Sign-In (OAuth2)
+* Email & Password
+* Google Sign-In (OAuth2)
 * Password reset via email
 * Session-based login (expires after 24 hours)
 * Secure password hashing with bcrypt
@@ -84,6 +87,9 @@ Create a `.env` file in the root directory:
 ## Email (Gmail) ##
 * EMAIL_USER=your_gmail_address
 * EMAIL_PASS=your_gmail_app_password
+
+## Links ##
+* BASE_URl = http://localhost:3000
 
 >  **Note**: If you're using Gmail and have 2FA enabled, you must [generate an App Password](https://support.google.com/accounts/answer/185833?hl=en) and use that as `EMAIL_PASS`.
 
