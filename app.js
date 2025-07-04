@@ -139,7 +139,14 @@ app.get("/setpass", ensureAuthenticated, (req, res) => {
   if (req.user.password !== "google") return res.redirect("/login");
   res.sendFile(__dirname + "/public/html/setpass.html");
 });
-
+app.get("/logout",(req,res)=>{
+  req.logOut((err)=>{
+    if(err){
+      console.log(err);
+    }
+    res.redirect("https://authentication-system-hftm.onrender.com/");
+  })
+})
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 app.get("/auth/google/home", passport.authenticate("google", {
   successRedirect: "/home",
