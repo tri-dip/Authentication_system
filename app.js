@@ -119,8 +119,6 @@ function sendforgetpassmail(email, token) {
       <p>We received a request to reset your password. Click the button below to choose a new password:</p>
       <p><a href="${link}" style="padding: 10px 20px; background-color: #f44336; color: white; text-decoration: none;">Reset Password</a></p>
       <p>If you did not request this, you can safely ignore this email.</p>
-      <p>Or copy and paste this link into your browser:</p>
-      <p>${link}</p>
       <br>
       <p>Thank you,<br>The MyApp Team</p>
     `,

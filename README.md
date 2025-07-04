@@ -39,24 +39,14 @@ This project is a secure, full-featured authentication system built with **Node.
 * Token-based email verification and password reset
 
 
-##  Folder Structure
-
-* project-root/
-* ├── public/
-* │   ├── html/              # Frontend HTML pages
-* │   └── styles/            # CSS and static files
-* ├── app.js                 # Main server file
-* ├── package.json
-* └── README.md
-
 
 ##  Setup & Run Locally
 
 ### 1. Clone the Repository
 
 
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+* git clone https://github.com/your-username/your-repo-name.git
+* cd your-repo-name
 
 
 ### 2. Install Dependencies
@@ -70,32 +60,32 @@ npm install
 Create a `.env` file in the root directory:
 
 
-## Database Config ##
+### 4.Database Config 
 * USER_NAME=your_db_user
 * USER_PASS=your_db_password
 * HOST_NAME=localhost
 * DB_NAME=your_db_name
 * DB_PORT=5432
 
-## Session Secret ##
+### 5.Session Secret 
 * SECRET_CODE=your_secret
 
-## Google OAuth ##
+### 6.Google OAuth 
 * GOOGLE_CLIENT_ID=your_google_client_id
 * GOOGLE_CLIENT_SECRET=your_google_client_secret
 
-## Email (Gmail) ##
+### 7.Email (Gmail) 
 * EMAIL_USER=your_gmail_address
 * EMAIL_PASS=your_gmail_app_password
 
-## Links ##
+### 8.Links 
 * BASE_URl = http://localhost:3000
 
 >  **Note**: If you're using Gmail and have 2FA enabled, you must [generate an App Password](https://support.google.com/accounts/answer/185833?hl=en) and use that as `EMAIL_PASS`.
 
 
 
-### 4. Set Up PostgreSQL
+### 9. Set Up PostgreSQL 
 
 * Run the following SQL to create the `users` table:
 
@@ -110,7 +100,7 @@ Create a `.env` file in the root directory:
   * reset_token_expires TIMESTAMP
 );
 
-### 5. Run the Server
+### 10. Run the Server
 
 * node app.js
 

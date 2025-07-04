@@ -46,10 +46,28 @@
         opacity: 0;
         transform: translateY(10px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    .logout-link {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 30px;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logout-link:hover {
+      background: linear-gradient(135deg, #ff4b2b, #ff416c);
+      transform: scale(1.05);
     }
 
     @media (max-width: 600px) {
@@ -73,6 +91,9 @@
     <h1>Congratulations</h1>
     <h2>You have successfully logged in</h2>
   </div>
+  <a href="/logout" class="logout-link">
+    Logout
+  </a>
 </body>
 
 </html>
