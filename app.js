@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import pg from "pg";
+import pkg from "pg";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import env from "dotenv";
@@ -17,7 +17,7 @@ const app = express();
 const saltRounds = parseInt(process.env.SALTROUNDS);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const { Pool } = require('pg');
+const { Pool } = pkg;
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
