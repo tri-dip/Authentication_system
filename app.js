@@ -11,12 +11,14 @@ import GoogleStrategy from "passport-google-oauth2";
 import session from "express-session";
 import { v4 as uuidv4 } from "uuid";
 import nodemailer from "nodemailer";
+import connectPgSimple from "connect-pg-simple";
 
 env.config();
 const app = express();
 const saltRounds = parseInt(process.env.SALTROUNDS);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+const PgSession = connectPgSimple(session);
 const { Pool } = pkg;
 
 const pool = new Pool({
@@ -32,6 +34,10 @@ export default pool;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(session({
+   store: new PgSession({
+    pool: db,
+    tableName: "sessions",
+  }),
   secret: process.env.SECRET_CODE,
   resave: false,
   saveUninitialized: false,
