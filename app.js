@@ -21,21 +21,21 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const PgSession = connectPgSimple(session);
 const { Pool } = pkg;
 
-const pool = new Pool({
+const db = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
 });
 
-export default pool;
+export default db;
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(session({
    store: new PgSession({
-    pool: pool,
+    pool: db,
     tableName: "sessions",
   }),
   secret: process.env.SECRET_CODE,
