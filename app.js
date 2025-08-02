@@ -17,15 +17,16 @@ const app = express();
 const saltRounds = parseInt(process.env.SALTROUNDS);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const { Pool } = pg;
-const PgSession = connectPgSimple(session);
+const { Pool } = require('pg');
 
-const db = new Pool({
+const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
 });
+
+module.exports = pool;
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
