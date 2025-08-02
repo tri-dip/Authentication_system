@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(session({
    store: new PgSession({
-    pool: db,
+    pool: pool,
     tableName: "sessions",
   }),
   secret: process.env.SECRET_CODE,
