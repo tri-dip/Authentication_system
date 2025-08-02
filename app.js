@@ -162,19 +162,33 @@ app.get("/auth/google/home", passport.authenticate("google", {
 }));
 
 app.post("/register", async (req, res) => {
-  const { email: mail_id, password } = req.body;
-  if (!mail_id || !password) return res.send(`<h2>Email and Password are required.</h2><a href="/">Go back</a>`);
-  if (password.length < 6) return res.send("Password must be at least 6 characters.");
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail_id)) return res.send(`<h2>Invalid email format.</h2><a href="/">Try again</a>`);
+  try {
+    const { email: mail_id, password } = req.body;
 
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
-  const token = uuidv4();
-  const expiry = new Date(Date.now() + 3600000);
-  await db.query("INSERT INTO users (mail_id, password, verified, verification_token, token_expires) VALUES ($1, $2, $3, $4, $5)", [mail_id, hashedPassword, false , token, expiry]);
+    if (!mail_id || !password)
+      return res.send(`<h2>Email and Password are required.</h2><a href="/">Go back</a>`);
+    if (password.length < 6)
+      return res.send("Password must be at least 6 characters.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail_id))
+      return res.send(`<h2>Invalid email format.</h2><a href="/">Try again</a>`);
 
-  sendVerificationEmail(mail_id, token);
-  res.send("Signup successful. Check your email to verify.");
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const token = uuidv4();
+    const expiry = new Date(Date.now() + 3600000);
+
+    await db.query(
+      "INSERT INTO users (mail_id, password, verified, verification_token, token_expires) VALUES ($1, $2, $3, $4, $5)",
+      [mail_id, hashedPassword, false, token, expiry]
+    );
+
+    sendVerificationEmail(mail_id, token);
+    res.send("Signup successful. Check your email to verify.");
+  } catch (err) {
+    console.error("Error during registration:", err); // This will print in Render logs
+    res.status(500).send("Internal server error.");
+  }
 });
+
 
 app.get("/verify", async (req, res) => {
   const token = req.query.token;
